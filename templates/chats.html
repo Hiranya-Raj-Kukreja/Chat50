@@ -1,0 +1,64 @@
+{% extends "app.html" %}
+
+{% block main %}
+    <div class="header friend-header">
+        <div class="display-div friend-display-div">
+            <div class="account-info">
+                <div class="account-container">
+                    <img src='{{ friend_info["dp_src"] }}' alt="Profile Picture" class="account-img">
+                </div>
+                <div class="username">
+                    <p>{{ friend_info["username"] }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="chats-section" id="chatsContainer">
+        {% for chat in chats %}
+            {% if chat["new-chat-divider"] %}
+                <div class="new_chat_divider">
+                    <div class="new_chat_count">{{ friend_info["notification_count"] }} UNREAD MESSAGES</div>
+                </div>
+            {% endif %}
+            {% if chat["date"] %}
+                <div class="date-display">
+                    <div class="date">
+                        {{ chat["date"] }}
+                    </div>
+                </div>
+            {% endif %}
+            {% if chat["sender_id"] == friend_info["id"] %}
+                <div class="chat received">
+                    <p>
+                        <span class="text">
+                            {{ chat["message"] }}
+                        </span>
+                        <span class="chat-details">
+                            <span class="message-timestamp">{{ chat["ist"] }}</span>
+                            <img src='{{ chat["status_tick"]}}' alt="Tick" class="tick-image">
+                        </span>
+                    </p>
+                </div>
+            {% elif chat["receiver_id"] == friend_info["id"] %}
+                <div class="chat sent">
+                    <p>
+                        <span class="text">
+                            {{ chat["message"] }}
+                        </span>
+                        <span class="chat-details">
+                            <span class="message-timestamp">{{ chat["ist"] }}</span>
+                            <img src='{{ chat["status_tick"] }}' alt="Tick" class="tick-image">
+                        </span>
+                    </p>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="chat-input">
+        <form action="/addChats" method="post" class="chat-input" id="chatForm">
+            <input type="hidden" name="friend_id" value='{{ friend_info["id"] }}'>
+            <textarea class="chat-input-tag" placeholder="Type a message" autofocus id="messageInput" name="message"></textarea>
+            <img src="../static/media/icons/send.png" class="send-img" id="submitMessageInput">
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "app.html" %}
+
+{% block main %}
+    <div class="header friend-header">
+        <div class="display-div friend-display-div">
+            <div class="account-info">
+                <div class="account-container">
+                    <img src='{{ friend_info["dp_src"] }}' alt="Profile Picture" class="account-img">
+                </div>
+                <div class="username">
+                    <p>{{ friend_info["username"] }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="new-chats-section">
+        <div class="new_chat">
+            Start a new Chat
+        </div>
+    </div>
+    <div class="chat-input">
+        <form action="/addChats" method="post" class="chat-input" id="chatForm">
+            <input type="hidden" name="friend_id" value='{{ friend_info["id"] }}'>
+            <textarea class="chat-input-tag" placeholder="Type a message" autofocus id="messageInput" name="message"></textarea>
+            <img src="../static/media/icons/send.png" class="send-img" id="submitMessageInput">
+        </form>
+    </div>
+{% endblock %}

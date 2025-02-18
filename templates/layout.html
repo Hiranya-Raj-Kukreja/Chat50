@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <link href="../static/media/icons/Chat50.png" rel="icon">
+
+        <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+
+        <title>Chat50: {% block title %}{% endblock %}</title>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </head>
+
+    <body>
+        {% block main %}{% endblock %}
+    </body>
+
+</html>

@@ -1,0 +1,10 @@
+{% extends "app.html" %}
+
+{% block account_info %}
+    <div class="account-container">
+        <img src="../media/{{ dp_src }}" alt="Profile Picture" class="account-img">
+    </div>
+    <div class="username">
+        <p>{{ username }}</p>
+    </div>
+{% endblock %}

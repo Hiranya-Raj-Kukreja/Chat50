@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+    <div class="login-main-container">
+        <div class="login-container">
+            <div class="logo-div">
+                <img src="../static/media/icons/Chat50.png" class="login-logo">
+            </div>
+            <div class="login-details">
+                <form action="/login" method="post" class="login-form">
+                    <div>
+                        <input autocomplete="off" autofocus class="login-input" id="username" name="username" placeholder="Username" type="text" required><span class="required">*</span>
+                    </div>
+                    <div>
+                        <input class="login-input" id="password" name="password" placeholder="Password" type="password" required><span class="required">*</span>
+                    </div>
+                    <button class="login-button" type="submit">Log In</button>
+                </form>
+                <p class="login-text">Don't have an account? <a class="login-link" href="/register">Register here.</a></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

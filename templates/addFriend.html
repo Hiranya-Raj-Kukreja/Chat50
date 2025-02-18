@@ -1,0 +1,13 @@
+{% extends "app.html" %}
+
+{% block main %}
+    <div class="addFriend">
+        <form action="/addFriend" method="post" class="addFriend-div">
+            <div class="addFriend-input">
+                <input autocomplete="off" autofocus id="addFriend-input-tag" name="addFriend" type="text">
+                <button class="addFriend-button">ADD FRIEND</button>
+            </div>
+        </form>
+        <p id="addFriend-response">{{ response }}</p>
+    </div>
+{% endblock %}

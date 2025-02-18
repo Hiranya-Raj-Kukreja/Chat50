@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Apology
+{% endblock %}
+
+{% block main %}
+    <div class="apology-div">
+        <img alt="{{ message }}" src="{{ url_for('static', filename='media/icons/robot.gif') }}" class="apology-img">
+        <p class="apology-text">{{ message }}</p>
+    </div>
+{% endblock %}

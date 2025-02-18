@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <title>Chat50</title>
+
+        <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='/media/icons/Chat50.png') }}">
+
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </head>
+
+    <body>
+
+        <div class="container">
+            <div class="left-div">
+                <div class="header">
+                    <div class="display-div">
+                        <div class="account-info">
+                            <div class="account-container">
+                                <img src="{{ dp_src }}" alt="Profile Picture" class="account-img">
+                            </div>
+                            <div class="username">
+                                <p>{{ user["username"] }}</p>
+                            </div>
+                        </div>
+                        <div class="settings-dropdown">
+                            <div class="account-container">
+                                <img src="../static/media/icons/settings.png" class="account-img" id="settings-icon">
+                            </div>
+                            <div class="dropdown-content">
+                                <a href="/">HOME</a>
+                                <a href="/showRequests">
+                                    {% if user["request_noti"] %}
+                                        <span class="request_noti_circle">
+                                            {{ user["request_noti"] }}
+                                        </span>
+                                    {% endif %}
+                                    SHOW REQUESTS
+                                </a>
+                                <a href="/addFriend">ADD FRIEND</a>
+                                <a href="/logout">LOG OUT</a>
+                            </div>
+                            {% if user["request_noti"] %}
+                                <div class="notification-circle-settings">{{ user["request_noti"] }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="search">
+                        <div class="search-bar">
+                            <img class="search-icon" src="../static/media/icons/search.png"></img>
+                            <input type="text" class="search-input" placeholder="Search..." id="searchInput">
+                        </div>
+                    </div>
+                </div>
+                <div class="contacts-section" id="friendListContainer">
+
+                    {% for friend in friends %}
+                        <form action="/chats" method="post" class="message-form">
+                            <input type="hidden" name="friend_id" value="{{ friend.id }}">
+                            <div class="message-container">
+                                <div class="dp-container">
+                                    <img src='{{ friend["dp_src"] }}' alt="Profile Picture" class="dp-img">
+                                </div>
+                                <div class="message-details">
+                                    <div class="first-line">
+
+                                        <div class="contact-name">{{ friend["username"] }}</div>
+                                        <div class="timestamp">{{ friend["last_time"] }}</div>
+                                    </div>
+                                    <div class="second-line">
+                                        {% if friend["last_message"] %}
+                                            {% if friend["sent"] %}
+                                                <div class="last-message">
+                                                    <img class="tick-image" src='{{ friend["status_tick"] }}'>
+                                                    {{ friend["last_message"]}}
+                                                </div>
+                                            {% else %}
+                                                <div class="last-message">
+                                                    {{ friend["last_message"]}}
+                                                </div>
+                                            {% endif %}
+                                        {% else %}
+                                            <div class="last-message no-message">{{ friend["no_message"] }}</div>
+                                        {% endif %}
+                                        {% if friend["notification"] %}
+                                            <div class="notification-circle">{{ friend["notification"] }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    {% endfor %}
+
+                </div>
+            </div>
+            <div class="right-div">
+                {% block main %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

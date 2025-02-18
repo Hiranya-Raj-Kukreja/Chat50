@@ -1,0 +1,40 @@
+{% extends "app.html" %}
+
+{% block main %}
+    <div class="notifications">
+        <div class="requests-header">
+            <h1 class="notifications-h1">REQUESTS</h1>
+        </div>
+        <div class="requests-list">
+            {% for request in requests %}
+                {% if request["sender_id"] == user_id %}
+                    <div class="friendRequest sentRequest">
+                        <div class="requestInfo">
+                            <p class="requestText">Friend Request Sent to {{ request["receiver_name"] }}</p>
+                            <p class="request-timestamp">{{ request["timestamp"] }}</p>
+                        </div>
+                        <div class="status">{{ request["status"] }}</div>
+                    </div>
+                {% elif request["receiver_id"] == user_id %}
+                    <div class="friendRequest receivedRequest">
+                        <div class="requestInfo">
+                            <p class="requestText">Friend Request Received from {{ request["sender_name"]}}</p>
+                            <p class="request-timestamp">{{ request["timestamp"] }}</p>
+                        </div>
+                        <div class="actions">
+                            {% if request["status"] in ["accepted", "rejected"] %}
+                                <div class="status">{{ request["status"] }}</div>
+                            {% else %}
+                                <form action="/showRequests" method="post">
+                                    <input type="hidden" name="sender_id" value="{{ request['sender_id'] }}">
+                                    <button class="acceptButton" name="status" value="accepted">Accept</button>
+                                    <button class="rejectButton" name="status" value="rejected">Reject</button>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "app.html" %}
+
+{% block contacts %}
+    {% for person in people %}
+        <div class="message-container">
+            <div class="dp-container">
+                <img src='{{ person["dp_src"] }}' alt="Profile Picture" class="dp-img">
+            </div>
+            <div class="message-details">
+                <div class="first-line">
+                    <div class="contact-name">{{ person["username"] }}</div>
+                    <div class="timestamp">Yesterday</div>
+                </div>
+                <div class="second-line">
+                    <div class="last-message">Helloafkjakdalja ljaklfja lkja lfa flal alk ala fl</div>
+                    <div class="notification-circle">8</div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

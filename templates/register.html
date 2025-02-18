@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <div class="login-main-container">
+        <div class="login-container">
+            <div class="logo-div">
+                <img src="../static/media/icons/Chat50.png" class="login-logo">
+            </div>
+            <div class="login-details">
+                <form action="/register" method="post" class="login-form" id="reg_form">
+                    <div>
+                        <input autocomplete="off" autofocus class="login-input" id="reg_username" name="username" placeholder="Username" type="text" required><span class="required">*</span>
+                    </div>
+                    <div>
+                        <input class="login-input" id="reg_password" name="password" placeholder="Password" type="password" required><span class="required">*</span>
+                    </div>
+                    <div>
+                        <input class="login-input" id="reg_confirmation" name="confirmation" placeholder="Confirmation" type="password" required><span class="required">*</span>
+                    </div>
+                    <div>
+                        <button class="login-button" type="submit" id="submitButton">Register</button>
+                    </div>
+                </form>
+                <p class="login-text">Already have an account? <a class="login-link" href="/login">Login here.</a></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
